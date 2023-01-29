@@ -9,7 +9,7 @@ from abc import ABC, abstractmethod
 
 class Node(ABC):
     def __init__(self):
-        self.service = None
+        self._service = None
 
     @abstractmethod
     def get_id(self):

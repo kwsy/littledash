@@ -7,6 +7,7 @@ from gevent.pywsgi import WSGIServer
 import argparse
 import socket
 import requests
+import zerorpc
 from flask import Flask
 from dash.node import LocalNode, RemoteNode
 
@@ -85,12 +86,12 @@ class DashManager():
 
     def register_node(self, name, host, port):
         node = RemoteNode(name, host, port)
-        node = self.get_node(node.get_id())
-        if not node:
+        store_node = self.get_node(node.get_id())
+        if not store_node:
             self.add_node(node)
 
     def get_all_hosts(self):
-        hosts = [item.host for item in self._nodes]
+        hosts = [item for item in self._nodes]
         return hosts
 
     def get_local_node(self):
